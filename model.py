@@ -18,7 +18,7 @@ class Encoder(tf.keras.layers.Layer):
 
     def predict(self, inputs):
         x = self.embedding(inputs)
-        output, state_h, state_c = self.lstm_1(x)
+        _, state_h, state_c = self.lstm_1(x)
         
         return state_h, state_c
 
