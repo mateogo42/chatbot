@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
-from cli.cli import preprocess_input
+from cli import preprocess_input
 from pathlib import Path
 from model import Chatbot
 import numpy as np
