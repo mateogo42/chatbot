@@ -40,7 +40,7 @@ def chat():
     model.train_on_batch([enc_input, dec_input], dec_target)
     model.load_weights(output_dir)
 
-    print(colored("MovieBot:", 'red', attrs=['bold']), "Hola, soy un bot programado para responder preguntas sobre peliculas. ¿En qué te puedo ayudar?. Para salir escriba la palabra adios")
+    print(colored("MovieBot:", 'red', attrs=['bold']), "Hola, soy un bot programado para responder preguntas sobre peliculas. ¿En qué te puedo ayudar?. Para salir escribe la palabra adios")
 
     stop_words = ['adios']
     should_exit = False
