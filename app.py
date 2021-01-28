@@ -11,6 +11,7 @@ import os
 import json
 
 TOKEN = os.environ.get("VERIFY_TOKEN")
+PAGE_ACCESS_TOKEN = os.environ.get('PAGE_ACCESS_TOKEN')
 
 with open(Path("data/tokenizer.pkl"), 'rb') as f:
     tokenizer_data = pickle.load(f)
@@ -82,8 +83,7 @@ def create_response(text: str) -> str:
     return answer
 
 async def send_message(recipient_id: str, message: str):
-    
-    params = {'access-token': TOKEN}
+    params = {'access-token': PAGE_ACCESS_TOKEN}
     headers = {'Content-Type': 'application/json'}
     data = json.dumps({
         'recipient': {
