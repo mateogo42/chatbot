@@ -81,8 +81,6 @@ def create_response(text: str) -> str:
             answer += f"{sampled_word} "    
 
         empty_target_seq = np.array([[sampled_word_index]])
-
-    print(answer)
     return answer
 
 def send_message(recipient_id: str, message: str):
@@ -98,6 +96,8 @@ def send_message(recipient_id: str, message: str):
     })
 
     response = requests.post('https://graph.facebook.com/v2.6/me/messages', params=params, headers=headers, data=data)
+
+    print(response.status_code)
 
 
 
