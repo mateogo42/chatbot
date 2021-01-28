@@ -59,7 +59,7 @@ def chat(webhook_data: WebhookData):
                     recipient_id = event['recipient']['id']
                     text = event['message']['text']
                     answer = create_response(text)
-                    send_message(recipient_id, answer)
+                    send_message(sender_id, answer)
 
     return Response(content="ok")
 
