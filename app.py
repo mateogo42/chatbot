@@ -37,7 +37,7 @@ class WebhookData(BaseModel):
 
 
 @app.router.get("/")
-async def verify(request: Request):
+def verify(request: Request):
 
     if request.query_params.get("hub.mode") == "subscribe" and request.query_params.get("hub.challenge"):
         if not request.query_params.get("hub.verify_token") == TOKEN:
@@ -49,7 +49,7 @@ async def verify(request: Request):
 
 
 @app.post("/")
-async def chat(webhook_data: WebhookData):
+def chat(webhook_data: WebhookData):
 
     if webhook_data.object == 'page':
         for entry in webhook_data.entry:
@@ -60,6 +60,8 @@ async def chat(webhook_data: WebhookData):
                     text = event['message']['text']
                     answer = create_response(text)
                     send_message(recipient_id, answer)
+
+    return Response(content="ok")
 
     
 
@@ -80,9 +82,10 @@ def create_response(text: str) -> str:
 
         empty_target_seq = np.array([[sampled_word_index]])
 
+    print(answer)
     return answer
 
-async def send_message(recipient_id: str, message: str):
+def send_message(recipient_id: str, message: str):
     params = {'access-token': PAGE_ACCESS_TOKEN}
     headers = {'Content-Type': 'application/json'}
     data = json.dumps({
