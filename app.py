@@ -86,7 +86,7 @@ def create_response(text: str) -> str:
     return answer
 
 def send_message(recipient_id: str, message: str):
-    params = {'access-token': PAGE_ACCESS_TOKEN}
+    params = {'access_token': PAGE_ACCESS_TOKEN}
     headers = {'Content-Type': 'application/json'}
     data = json.dumps({
         'recipient': {
