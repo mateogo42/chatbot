@@ -15,8 +15,6 @@ import sys
 
 data_dir = Path('data')
 output_dir = Path('model/model.hdf5')
-START_TOKEN = '<START> '
-END_TOKEN = ' <END>'
 with open(data_dir/'tokenizer.pkl', 'rb') as f:
     tokenizer_data = pickle.load(f)
 

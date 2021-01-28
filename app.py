@@ -9,6 +9,7 @@ import numpy as np
 import requests
 import os
 import json
+import re
 
 TOKEN = os.environ.get("VERIFY_TOKEN")
 PAGE_ACCESS_TOKEN = os.environ.get('PAGE_ACCESS_TOKEN')
@@ -60,13 +61,13 @@ def chat(webhook_data: WebhookData):
                     sender_id = event['sender']['id']
                     recipient_id = event['recipient']['id']
                     text = event['message']['text']
-                    text_words = text.strip().split(' ') 
-                    if any([w in text_words for w in start_words]):
+                    text_words = text.lower().strip().split(' ') 
+                    if any([re.match(w, text.lower()) for w in start_words]):
                         send_message(sender_id, "Hola. Soy un bot \U0001F916 programado para responder preguntas sobre peliculas. ¿En qué puedo ayudarte?")
                         if len(text_words) > 1:
                             answer = create_response(text)
                             send_message(sender_id, answer)
-                    elif any([w in text_words for w in stop_words]):
+                    elif any([re.match(w, text.lower()) for w in stop_words]):
                         send_message(sender_id, "Ha sido un placer servirte. Si tienes alguna otra pregunta puedes escribirme en cualquier momento \U0001F642")
                     else:
                         answer = create_response(text)
